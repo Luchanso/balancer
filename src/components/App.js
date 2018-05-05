@@ -160,6 +160,7 @@ export default class App extends React.Component {
   handleReset = () => {
     this.setState({
       money: {},
+      stock: "0",
       last: 0
     });
   };
