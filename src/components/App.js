@@ -1,5 +1,5 @@
 import React from "react";
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from "react-native";
 import {
   Container,
   Header,
@@ -9,7 +9,8 @@ import {
   Label,
   Button,
   Text,
-  Spinner
+  Spinner,
+  View
 } from "native-base";
 
 import Stock from "./Stock";
@@ -69,6 +70,11 @@ export default class App extends React.Component {
     );
     const summ = calculated + Number(this.state.stock);
 
+    const moneyResult = summ ? (calculated / summ * 100).toFixed(3) : "0.000";
+    const stockResult = summ
+      ? (this.state.stock / summ * 100).toFixed(3)
+      : "0.000";
+
     return (
       <Container>
         <Header />
@@ -81,19 +87,27 @@ export default class App extends React.Component {
             {this.renderMoney()}
           </Form>
           <Text style={{ margin: 15 }}>
-            money {(calculated / summ * 100).toFixed(3)} / stock{" "}
-            {(this.state.stock / summ * 100).toFixed(3)}
+            stock {stockResult} / money {moneyResult}
           </Text>
-          <Button style={{ margin: 15 }} onPress={this.handleAdd}>
-            <Text>Add</Text>
-          </Button>
-          <Button style={{ margin: 15 }} onPress={this.handleReset}>
-            <Text>Reset</Text>
-          </Button>
+          <View style={{ flexDirection: "row" }}>
+            <Button
+              style={{ marginLeft: 15, marginVertical: 7.5 }}
+              onPress={this.handleAdd}
+            >
+              <Text>Add</Text>
+            </Button>
+            <Button
+              style={{ marginLeft: 15, marginVertical: 7.5 }}
+              onPress={this.handleReset}
+              danger
+            >
+              <Text>Reset</Text>
+            </Button>
+          </View>
         </Content>
       </Container>
     );
-  }
+  };
 
   renderMoney() {
     return Object.values(this.state.money).map(money => (
