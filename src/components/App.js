@@ -87,7 +87,8 @@ export default class App extends React.Component {
             {this.renderMoney()}
           </Form>
           <Text style={{ margin: 15, marginBottom: 7.5 }}>
-            stock {stockResult} / money {moneyResult}
+            stock {stockResult} / money {moneyResult}{'\n'}
+            stock {this.state.stock} / money {calculated} / sum {summ}
           </Text>
           <View style={{ flexDirection: "row" }}>
             <Button
